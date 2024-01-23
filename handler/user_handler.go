@@ -1,9 +1,11 @@
 package handler
 
 import (
+	"app/log"
 	"app/model"
-	"app/security"
-	"log"
+	req "app/model/req"
+	"app/repository"
+	security "app/security"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
@@ -13,10 +15,11 @@ import (
 )
 
 type UserHandler struct {
+	UserRepo repository.UserRepo
 }
 
 func (u *UserHandler) HandleSignUp(c echo.Context) error {
-	req := req2.ReqSignUp{}
+	req := req.ReqSignUp{}
 	if err := c.Bind(&req); err != nil {
 		log.Error(err.Error())
 		return c.JSON(http.StatusBadRequest, model.Response{
@@ -50,7 +53,30 @@ func (u *UserHandler) HandleSignUp(c echo.Context) error {
 		})
 	}
 
-	return c.JSON(http.StatusOK, user)
+	user := model.User{
+		UserId:   userID.String(),
+		FullName: req.FullName,
+		Email:    req.Email,
+		PassWord: hash,
+		Role:     role,
+		Token:    "",
+	}
+
+	user, err = u.UserRepo.SaveUser(c.Request().Context(), user)
+
+	if err != nil {
+		return c.JSON(http.StatusForbidden, model.Response{
+			StatusCode: http.StatusForbidden,
+			Message:    err.Error(),
+			Data:       nil,
+		})
+	}
+
+	return c.JSON(http.StatusOK, model.Response{
+		StatusCode: http.StatusOK,
+		Message:    "Xử lý thành công",
+		Data:       user,
+	})
 }
 
 func (u *UserHandler) HandleSignIn(c echo.Context) error {

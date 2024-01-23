@@ -9,9 +9,11 @@ import (
 type API struct {
 	Echo        *echo.Echo
 	UserHandler handler.UserHandler
+	//RepoHandler handler.RepoHandler
 }
 
-func SetupRouter() {
-	API.Echo.GET("/user/sign-in", api.UserHandler.HandleSignIn)
-	API.Echo.GET("/user/sign-up", api.UserHandler.HandleSignUp)
+func (api *API) SetupRouter() {
+	// user
+	api.Echo.POST("/user/sign-in", api.UserHandler.HandleSignIn)
+	api.Echo.POST("/user/sign-up", api.UserHandler.HandleSignUp)
 }
