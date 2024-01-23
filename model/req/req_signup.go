@@ -1,7 +1,7 @@
 package req
 
 type ReqSignUp struct {
-	FullName string `validate:"required"`
-	Email    string `validate:"required"`
-	PassWord string `validate:"required"`
+	Email    string `json:"email, omitempty" validate:"required"`
+	PassWord string `json:"password, omitempty" validate:"required"`
+	FullName string `json:"fullName, omitempty" validate:"required"`
 }

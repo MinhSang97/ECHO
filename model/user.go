@@ -3,12 +3,12 @@ package model
 import "time"
 
 type User struct {
-	UserId    string    `db:"user_id, omitempty"`
-	FullName  string    `db:"full_name, omitempty"`
-	Email     string    `db:"email, omitempty"`
-	PassWord  string    `db:"password, omitempty"`
-	Role      string    `db:"role, omitempty"`
-	CreatedAt time.Time `db:"created_at, omitempty"`
-	UpdatedAt time.Time `db:"updated_at, omitempty"`
-	Token     string
+	UserId    string    `json:"-"  db:"user_id, omitempty"`
+	FullName  string    `json:"fullName,omitempty" db:"full_name, omitempty"`
+	Email     string    `json:"email,omitempty" db:"email, omitempty"`
+	PassWord  string    `json:"-" db:"password, omitempty"`
+	Role      string    `json:"role,omitempty" db:"role, omitempty"`
+	CreatedAt time.Time `json:"-" db:"created_at, omitempty"`
+	UpdatedAt time.Time `json:"-" db:"updated_at, omitempty"`
+	Token     string    `json:"token,omitempty"`
 }
