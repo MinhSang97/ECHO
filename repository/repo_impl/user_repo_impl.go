@@ -3,11 +3,15 @@ package repoimpl
 import (
 	"app/banana"
 	"app/dbutil"
+	"app/log"
 	"app/model"
+	"app/model/req"
 	"app/repository"
 	"context"
-	"github.com/lib/pq"
+	"database/sql"
 	"time"
+
+	"github.com/lib/pq"
 )
 
 type UserRepoImpl struct {
@@ -30,7 +34,7 @@ func (u *UserRepoImpl) SaveUser(context context.Context, user model.User) (model
 	_, err := u.sql.Db.NamedExecContext(context, statment, user)
 
 	if err != nil {
-		//log.Error(err.Error())
+		log.Error(err.Error())
 		if err, ok := err.(*pq.Error); ok {
 			if err.Code.Name() == "unique_violation" {
 				return user, banana.UserConflict
@@ -38,5 +42,20 @@ func (u *UserRepoImpl) SaveUser(context context.Context, user model.User) (model
 		}
 		return user, banana.SignUpFail
 	}
+	return user, nil
+}
+
+func (u *UserRepoImpl) CheckLogin(context context.Context, loginReq req.ReqSignIn) (model.User, error) {
+	var user = model.User{}
+	err := u.sql.Db.GetContext(context, &user, "SELECT * FROM users WHERE email = $1 ", loginReq.Email)
+	if err != nil {
+		log.Error(err.Error())
+		if err == sql.ErrNoRows {
+			return user, banana.UserNotFound
+		}
+		log.Error(err.Error())
+		return user, err
+	}
+
 	return user, nil
 }
