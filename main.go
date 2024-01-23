@@ -52,8 +52,6 @@ func main() {
 		Output: logFile,
 	}))
 
-	e.Use(middleware.AddTrailingSlash())
-
 	userHandler := handler.UserHandler{
 		UserRepo: repoimpl.NewUserRepo(sql),
 	}

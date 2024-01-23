@@ -2,6 +2,7 @@ package router
 
 import (
 	"app/handler"
+	myMiddleware "app/middleware"
 	"github.com/labstack/echo/v4"
 )
 
@@ -14,6 +15,6 @@ type API struct {
 func (api *API) SetupRouter() {
 	// user
 
-	api.Echo.POST("/user/sign-in", api.UserHandler.HandleSignIn)
+	api.Echo.POST("/user/sign-in", api.UserHandler.HandleSignIn, myMiddleware.ISAdmin())
 	api.Echo.POST("/user/sign-up", api.UserHandler.HandleSignUp)
 }
