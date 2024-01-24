@@ -3,6 +3,7 @@ package main
 import (
 	"app/dbutil"
 	"app/handler"
+	"app/helper"
 	repoimpl "app/repository/repo_impl"
 	"app/router"
 	"github.com/labstack/echo/v4"
@@ -24,6 +25,11 @@ func main() {
 	defer sql.Close()
 
 	e := echo.New()
+
+	structValidator := helper.NewStructValidator()
+	structValidator.RegisterValidate()
+
+	e.Validator = structValidator
 
 	// Lấy ngày hiện tại và định dạng thành chuỗi "2006-01-02"
 	currentDate := time.Now().Format("2006-01-02")

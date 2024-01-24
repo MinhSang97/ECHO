@@ -2,11 +2,13 @@ package sercurity
 
 import (
 	"app/model"
+	"fmt"
+
 	"github.com/golang-jwt/jwt"
 	"time"
 )
 
-const SECRET_KEY = "minhsang"
+const SECRET_KEY = "learngolanglalalafdfds"
 
 func GenToken(user model.User) (string, error) {
 	claims := &model.JwtCustomClaims{
@@ -20,8 +22,10 @@ func GenToken(user model.User) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	result, err := token.SignedString([]byte(SECRET_KEY))
 	if err != nil {
-		return "", err
+		fmt.Println("Loi tao token", err.Error())
+		return "Tao Token Loi!", err
 	}
+
 	return result, nil
 
 }

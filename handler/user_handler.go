@@ -1,12 +1,14 @@
 package handler
 
 import (
+	"app/banana"
 	"app/log"
 	"app/model"
 	"app/model/req"
 	"app/repository"
-	security "app/sercurity"
+	sercurity "app/sercurity"
 	"github.com/go-playground/validator/v10"
+	"github.com/golang-jwt/jwt"
 	uuid "github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -36,7 +38,7 @@ func (u *UserHandler) HandleSignUp(c echo.Context) error {
 		})
 	}
 
-	hash := security.HashAndSalt([]byte(req.PassWord))
+	hash := sercurity.HashAndSalt([]byte(req.PassWord))
 	role := model.MEMBER.String()
 
 	userId, err := uuid.NewUUID()
@@ -68,7 +70,7 @@ func (u *UserHandler) HandleSignUp(c echo.Context) error {
 		})
 	}
 	//gen token
-	token, err := security.GenToken(user)
+	token, err := sercurity.GenToken(user)
 	if err != nil {
 		//log.Error(err.Error())
 		return c.JSON(http.StatusInternalServerError, model.Response{
@@ -116,7 +118,7 @@ func (u *UserHandler) HandleSignIn(c echo.Context) error {
 	}
 
 	// check pass
-	isTheSame := security.ComparePasswords(user.PassWord, []byte(req.PassWord))
+	isTheSame := sercurity.ComparePasswords(user.PassWord, []byte(req.PassWord))
 	if !isTheSame {
 		return c.JSON(http.StatusUnauthorized, model.Response{
 			StatusCode: http.StatusUnauthorized,
@@ -126,7 +128,7 @@ func (u *UserHandler) HandleSignIn(c echo.Context) error {
 	}
 
 	//gen token
-	token, err := security.GenToken(user)
+	token, err := sercurity.GenToken(user)
 	if err != nil {
 		//log.Error(err.Error())
 		return c.JSON(http.StatusInternalServerError, model.Response{
@@ -145,5 +147,27 @@ func (u *UserHandler) HandleSignIn(c echo.Context) error {
 }
 
 func (u *UserHandler) Profile(c echo.Context) error {
-	return nil
+	tokenData := c.Get("user").(*jwt.Token)
+	claims := tokenData.Claims.(*model.JwtCustomClaims)
+
+	user, err := u.UserRepo.SelectUserById(c.Request().Context(), claims.UserId)
+	if err != nil {
+		if err == banana.UserNotFound {
+			return c.JSON(http.StatusNotFound, model.Response{
+				StatusCode: http.StatusNotFound,
+				Message:    err.Error(),
+				Data:       nil,
+			})
+		}
+		return c.JSON(http.StatusInternalServerError, model.Response{
+			StatusCode: http.StatusInternalServerError,
+			Message:    err.Error(),
+			Data:       nil,
+		})
+	}
+	return c.JSON(http.StatusOK, model.Response{
+		StatusCode: http.StatusOK,
+		Message:    "Xử lý thành công",
+		Data:       user,
+	})
 }
