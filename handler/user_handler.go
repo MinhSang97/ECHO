@@ -5,7 +5,7 @@ import (
 	"app/model"
 	"app/model/req"
 	"app/repository"
-	security "app/security"
+	security "app/sercurity"
 	"github.com/go-playground/validator/v10"
 	uuid "github.com/google/uuid"
 	"github.com/labstack/echo/v4"
@@ -67,6 +67,18 @@ func (u *UserHandler) HandleSignUp(c echo.Context) error {
 			Data:       nil,
 		})
 	}
+	//gen token
+	token, err := security.GenToken(user)
+	if err != nil {
+		//log.Error(err.Error())
+		return c.JSON(http.StatusInternalServerError, model.Response{
+			StatusCode: http.StatusInternalServerError,
+			Message:    err.Error(),
+			Data:       nil,
+		})
+	}
+	user.Token = token
+
 	return c.JSON(http.StatusOK, model.Response{
 		StatusCode: http.StatusOK,
 		Message:    "Xử lý thành công",
@@ -108,14 +120,30 @@ func (u *UserHandler) HandleSignIn(c echo.Context) error {
 	if !isTheSame {
 		return c.JSON(http.StatusUnauthorized, model.Response{
 			StatusCode: http.StatusUnauthorized,
-			Message:    "Đăng nhạp thất bại",
+			Message:    "Đăng nhập thất bại",
 			Data:       nil,
 		})
 	}
+
+	//gen token
+	token, err := security.GenToken(user)
+	if err != nil {
+		//log.Error(err.Error())
+		return c.JSON(http.StatusInternalServerError, model.Response{
+			StatusCode: http.StatusInternalServerError,
+			Message:    err.Error(),
+			Data:       nil,
+		})
+	}
+	user.Token = token
 
 	return c.JSON(http.StatusOK, model.Response{
 		StatusCode: http.StatusOK,
 		Message:    "Xử lý thành công",
 		Data:       user,
 	})
+}
+
+func (u *UserHandler) Profile(c echo.Context) error {
+	return nil
 }

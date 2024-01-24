@@ -1,0 +1,7 @@
+time="2022-10-31T13:15:54.95997+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=145
+time="2022-10-31T13:16:01.175242+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=145
+time="2022-10-31T13:16:20.470568+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=145
+time="2022-10-31T13:18:09.9796263+07:00" level=error msg="Key: 'ReqSignUp.FullName' Error:Field validation for 'FullName' failed on the 'required' tag" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=35
+time="2022-10-31T14:42:50.3994697+07:00" level=error msg="validator not registered" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=112
+time="2022-10-31T14:43:02.2301647+07:00" level=error msg="validator not registered" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=112
+time="2022-10-31T16:19:03.1565694+07:00" level=error msg="Email là bắt buộc" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=111

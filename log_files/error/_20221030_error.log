@@ -1,0 +1,20 @@
+time="2022-10-30T15:23:59.8753903+07:00" level=error msg="pq: duplicate key value violates unique constraint \"users_email_key\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=41
+time="2022-10-30T15:24:24.9576528+07:00" level=error msg="pq: duplicate key value violates unique constraint \"users_email_key\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=41
+time="2022-10-30T15:24:28.1352123+07:00" level=error msg="pq: duplicate key value violates unique constraint \"users_email_key\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=41
+time="2022-10-30T15:24:29.3237041+07:00" level=error msg="pq: duplicate key value violates unique constraint \"users_email_key\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=41
+time="2022-10-30T15:25:33.9059976+07:00" level=error msg="pq: duplicate key value violates unique constraint \"users_email_key\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=41
+time="2022-10-30T15:38:32.0082548+07:00" level=error msg="pq: duplicate key value violates unique constraint \"users_email_key\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=41
+time="2022-10-30T15:38:32.0158847+07:00" level=error msg="Lỗi: người dùng đã tồn tại" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=69
+time="2022-10-30T15:38:48.4827794+07:00" level=error msg="pq: duplicate key value violates unique constraint \"users_email_key\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=41
+time="2022-10-30T15:38:48.4833132+07:00" level=error msg="Lỗi: người dùng đã tồn tại" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=69
+time="2022-10-30T16:40:10.5717701+07:00" level=error msg="Key: 'ReqSignUp.FullName' Error:Field validation for 'FullName' failed on the 'required' tag" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=35
+time="2022-10-30T16:41:55.3088812+07:00" level=error msg="pq: syntax error at or near \"lala\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=71
+time="2022-10-30T16:43:04.3653719+07:00" level=error msg="pq: syntax error at or near \"lala\"" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=71
+time="2022-10-30T18:31:44.5588246+07:00" level=error msg="code=400, message=EOF" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=90
+time="2022-10-30T21:43:46.0578157+07:00" level=error msg="code=400, message=EOF" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=104
+time="2022-10-30T21:46:20.0638084+07:00" level=error msg="sql: no rows in result set" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/repository/repo_impl/user_repo_impl.go" line=60
+time="2022-10-30T22:10:32.3349625+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=145
+time="2022-10-30T22:13:45.1942062+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=145
+time="2022-10-30T22:14:37.4051133+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=145
+time="2022-10-30T22:18:52.8088146+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=145
+time="2022-10-30T22:24:33.2783201+07:00" level=error msg="key is of invalid type" file="C:/Users/HUULOC/GolandProjects/LearnGoLang2/handler/user_handler.go" line=80
