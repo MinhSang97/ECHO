@@ -18,15 +18,14 @@ func CrawlRepo(githubRepo repository.GithubRepo) {
 	c := colly.NewCollector()
 
 	repos := make([]model.GithubRepo, 0, 30)
-	c.OnHTML(`article[class=Box-row]`, func(e *colly.HTMLElement) {
+	c.OnHTML("article.Box-row", func(e *colly.HTMLElement) {
 		var githubRepo model.GithubRepo
-
-		githubRepo.Name = e.ChildText("h1.h3 > a")
+		// repair before crawler no data
+		githubRepo.Name = strings.Join(strings.Fields(e.DOM.Find("h2").Text()), " ")
 		fmt.Println(githubRepo.Name)
-
-		n := strings.Replace(e.ChildText("h1.h3 > a"), "\n", "", -1)
-		githubRepo.Name = strings.Replace(n, " ", "", -1)
-		fmt.Println(githubRepo.Name)
+		if githubRepo.Name == "" {
+			fmt.Println("error: khong co data")
+		}
 
 		githubRepo.Description = e.ChildText("p.col-9")
 
@@ -36,8 +35,12 @@ func CrawlRepo(githubRepo repository.GithubRepo) {
 		if len(match) > 0 {
 			githubRepo.Color = match[0]
 		}
-
-		githubRepo.Url = e.ChildAttr("h1.h3 > a", "href")
+		// repair before crawler no url
+		githubRepo.Url = e.ChildAttr("h2 a", "href")
+		// Kiểm tra và thêm "https://github.com/" nếu cần
+		if !strings.HasPrefix(githubRepo.Url, "https://github.com/") {
+			githubRepo.Url = "https://github.com" + githubRepo.Url
+		}
 
 		githubRepo.Lang = e.ChildText("span[itemprop=programmingLanguage]")
 
