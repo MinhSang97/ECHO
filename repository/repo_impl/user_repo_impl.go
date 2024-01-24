@@ -34,7 +34,7 @@ func (u *UserRepoImpl) SaveUser(context context.Context, user model.User) (model
 	_, err := u.sql.Db.NamedExecContext(context, statment, user)
 
 	if err != nil {
-		log.Error(err.Error())
+		//log.Error(err.Error())
 		if err, ok := err.(*pq.Error); ok {
 			if err.Code.Name() == "unique_violation" {
 				return user, banana.UserConflict
